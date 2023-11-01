@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccesoController;
 use App\Http\Controllers\AuthController;
+use App\Http\Middleware\AccessAuditMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +22,7 @@ Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'audit']], function () {
     Route::get('/', [AccesoController::class, 'index'])->name('index');
     Route::get('/revisar', [AccesoController::class, 'index'])->name('revisar');
     Route::get('/validar', [AccesoController::class, 'index'])->name('validar');

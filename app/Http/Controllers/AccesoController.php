@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AccesoController extends Controller
 {
+
     public function index(){
         return view('bienvenido', [
             'usuario' => Auth::user(),
