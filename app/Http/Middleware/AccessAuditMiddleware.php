@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Jobs\AccessAuditEmailJob;
 use App\Models\AccessAudit;
 use Closure;
 use Illuminate\Support\Facades\Auth;
@@ -43,6 +44,7 @@ class AccessAuditMiddleware
         ]);
 
         if (!$isAllowed) {
+            AccessAuditEmailJob::dispatch(Auth::id());
             return abort(403, 'Acceso no permitido');
         }
 
