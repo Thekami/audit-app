@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\AccessAudit;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -41,9 +42,18 @@ class AccessAuditEmailJob implements ShouldQueue
             ->where('permitido', 0)
             ->count();
 
+        logger("entro job");
+        
         if ($unauthorizedAccessCount >= 5) {
-            // Envía un correo electrónico
-            Mail::to('thekamitorres@gmail.com')->send(new AccessAuditEmail($unauthorizedAccessCount));
+            // logger("intenta enviar correo");
+            Mail::to('thekamitorres@gmail.com')->send(new AccessAuditEmail($unauthorizedAccessCount, Carbon::now()));
+
+            // $mail = app(AccessAuditEmail::class, [
+            //     'unauthorizedAccessCount' => $unauthorizedAccessCount,
+            //     'fecha' => Carbon::now() 
+            // ]);
+            // logger("intenta enviar correo");
+            // Mail::to('thekamitorres@gmail.com')->send($mail);
         }
     }
 }

@@ -17,7 +17,6 @@
                 <p>Estimado usuario,</p>
                 <p>Se ha detectado un acceso no permitido de forma recurrente</p>
                 <ul>
-                    <li>Ruta: {{ $ruta }}</li>
                     <li>Fecha: {{ $datetime }}</li>
                     <li>No. intentos: {{ $unauthorizedAccessCount }}</li>
                 </ul>

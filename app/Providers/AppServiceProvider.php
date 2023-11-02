@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Mail\AccessAuditEmail;
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(AccessAuditEmail::class, function ($app) {
+            logger("entro a ServiceProvider");
+            return new AccessAuditEmail(15, Carbon::now());
+        });
     }
 
     /**
