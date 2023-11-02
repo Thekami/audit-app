@@ -45,7 +45,7 @@ class AccessAuditEmailJob implements ShouldQueue
         logger("entro job");
         
         if ($unauthorizedAccessCount >= 5) {
-            // logger("intenta enviar correo");
+            logger("intenta enviar correo");
             Mail::to('thekamitorres@gmail.com')->send(new AccessAuditEmail($unauthorizedAccessCount, Carbon::now()));
 
             // $mail = app(AccessAuditEmail::class, [

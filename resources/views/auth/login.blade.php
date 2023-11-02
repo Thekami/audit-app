@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Login</div>
-
+                
                 <div class="card-body" style="padding: 5px;">
                     @if (session('login_error'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert"  style="padding: 5px;">
@@ -14,8 +14,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="padding: 9px;font-size: 7px;"></button>
                         </div>
                     @endif
-                    
-
+                
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

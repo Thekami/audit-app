@@ -22,11 +22,12 @@ Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/', [AccesoController::class, 'index'])->name('index')->middleware('auth');
+
 Route::group(['middleware' => ['auth', 'audit']], function () {
-    Route::get('/', [AccesoController::class, 'index'])->name('index');
-    Route::get('/revisar', [AccesoController::class, 'index'])->name('revisar');
-    Route::get('/validar', [AccesoController::class, 'index'])->name('validar');
-    Route::get('/crear', [AccesoController::class, 'index'])->name('crear');
+    Route::get('/revisar', [AccesoController::class, 'otherViews'])->name('revisar');
+    Route::get('/validar', [AccesoController::class, 'otherViews'])->name('validar');
+    Route::get('/crear', [AccesoController::class, 'otherViews'])->name('crear');
 });
 
 

@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
 
     public function index(){
-      return view('auth.login');
+      return Auth::check() ? redirect('/') : view('auth.login');
     }
     public function login(Request $request){
         
@@ -32,7 +32,8 @@ class AuthController extends Controller
             return back()->with(['login_error' => 'Credenciales incorrectas']);
             
         } catch (Exception $e) {
-            return back()->withErrors($e->getMessage());
+            logger($e->getMessage());
+            return back()->with(['login_error' => 'Ocurrió un error inesperado, intentelo mas tarde']);
         }
     }
 
